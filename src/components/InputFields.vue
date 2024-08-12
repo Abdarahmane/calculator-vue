@@ -1,30 +1,26 @@
 <template>
-    <div>
-      <label class="form-label">Enter the numbers:</label>
-      <input
-        type="number"
-        :value="number1"
-        @input="$emit('update:number1', $event.target.value)"
-        class="form-control"
-        placeholder="First number"
-      />
-      <input
-        type="number"
-        :value="number2"
-        @input="$emit('update:number2', $event.target.value)"
-        class="form-control mt-2"
-        placeholder="Second number"
-      />
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'InputFields',
-    props: {
-      number1: Number,
-      number2: Number
+  <div>
+    <input type="number" v-model="num1" placeholder="Enter first number">
+    <input type="number" v-model="num2" placeholder="Enter second number">
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['number1', 'number2'],
+  data() {
+    return {
+      num1: this.number1,
+      num2: this.number2
+    };
+  },
+  watch: {
+    num1(newValue) {
+      this.$emit('update:number1', newValue);
+    },
+    num2(newValue) {
+      this.$emit('update:number2', newValue);
     }
-  };
-  </script>
-  
+  }
+};
+</script>

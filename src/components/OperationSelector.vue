@@ -1,26 +1,26 @@
 <template>
-    <div>
-      <div v-for="operation in operations" :key="operation.value" class="form-check">
-        <input
-          type="radio"
-          :id="operation.value"
-          :value="operation.value"
-          @change="$emit('update:selectedOperation', $event.target.value)"
-          :checked="selectedOperation === operation.value"
-          class="form-check-input"
-        />
-        <label class="form-check-label" :for="operation.value">{{ operation.name }}</label>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'OperationSelector',
-    props: {
-      selectedOperation: String,
-      operations: Array
+  <div>
+    <select v-model="selected">
+      <option value="add">Addition</option>
+      <option value="subtract">Subtraction</option>
+      <option value="multiply">Multiplication</option>
+      <option value="divide">Division</option>
+    </select>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['selectedOperation'],
+  data() {
+    return {
+      selected: this.selectedOperation
+    };
+  },
+  watch: {
+    selected(newValue) {
+      this.$emit('update:selectedOperation', newValue);
     }
-  };
-  </script>
-  
+  }
+};
+</script>
